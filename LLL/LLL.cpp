@@ -40,34 +40,33 @@ void LLL_node::set_next(LLL_node * new_next)
     next = new_next;
 }
 
+
 // ===============================================================
+// LLL_node
+// ===============================================================
+
 // LLL -- default constructor
-// Scenarios: new list starts empty (head = nullptr)
-// ===============================================================
 LLL::LLL() : head(nullptr)
 {
 }
 
 // ===============================================================
 // LLL -- copy constructor
-// Scenarios:
-//   - Source is empty:       copy is empty
-//   - Source has 1+ nodes:   deep copy every node, same order
+//   - 
+//   - 
 // ===============================================================
 LLL::LLL(const LLL & source) : head(nullptr)
 {
     copy(source);
 }
 
-// WRAPPER
 void LLL::copy(const LLL & source)
 {
     return;
 }
 
-// RECURSIVE
-//   - Base case (source == nullptr): end of list, or source was empty
-//   - Otherwise: copy one node, then recurse on the rest
+//   - Base case? : 
+//   - Else:      :
 void LLL::copy(LLL_node *& dest, LLL_node * source)
 {
     return;
@@ -98,10 +97,10 @@ LLL::~LLL()
 
 // insert (at the end of the list)
 // Scenarios:
-//   - Empty list:        new node becomes head
-//   - One node:          recurse once, attach after the only node
-//   - Many nodes:        recurse to the end, attach after the last node
-// (all three are handled by the same base case: current == nullptr)
+//   - 
+//   - 
+//   - 
+// Base Case?
 void LLL::insert(const string & new_data)
 {
     return;
@@ -160,15 +159,14 @@ int LLL::display_by_name(LLL_node * current, const string & name) const
 
 // remove_by_name (removes every node whose data matches)
 // Scenarios:
-//   - Empty list:                      return 0
-//   - One node, match:                 remove it, list becomes empty
-//   - One node, no match:              return 0, list unchanged
-//   - Many nodes, match at the front:  head moves to the next node
-//   - Many nodes, match in the middle: relink around the node
-//   - Many nodes, match at the end:    previous node's next becomes nullptr
-//   - Consecutive/multiple matches:    keep checking after each removal
-//   - No match:                        return 0, list unchanged
-// (the reference parameter lets one code path cover front/middle/end)
+//   - 
+//   - 
+//   - 
+//   - 
+//   - 
+//   - 
+//   - 
+// hint: the reference parameter lets one code path cover multiple scenarios
 int LLL::remove_by_name(const string & name)
 {
     return -1;

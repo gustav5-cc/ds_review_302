@@ -1,4 +1,4 @@
-// cll.h
+// CLL.h
 // Circular Linked List (CLL) of strings -- all list operations are recursive.
 // The list keeps a single REAR pointer; rear->next is the first node.
 

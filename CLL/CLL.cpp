@@ -58,9 +58,9 @@ CLL::CLL() : rear(nullptr)
 
 // CLL -- copy constructor
 // Scenarios:
-//   - Source is empty:       copy is empty
-//   - Source has 1 node:     copy has 1 node pointing to itself
-//   - Source has many nodes: deep copy in order, then close the circle
+//   - 
+//   - 
+//   - 
 CLL::CLL(const CLL & source) : rear(nullptr)
 {
     copy(source);
@@ -72,10 +72,6 @@ void CLL::copy(const CLL & source)
     return;
 }
 
-// RECURSIVE: copies source..source_rear as a linear chain, and sets rear
-// to the last node created.
-//   - Base case (source == source_rear): copy the last node, set rear
-//   - Otherwise: copy one node, then recurse on the rest
 void CLL::copy(CLL_node *& dest, CLL_node * source, CLL_node * source_rear)
 {
     return;
@@ -104,12 +100,10 @@ CLL::~CLL()
     remove_all();
 }
 
-// insert (at the end of the list) -- O(1), NOT recursive
 // Scenarios:
-//   - Empty list:    new node becomes rear and points to itself
-//   - One node:      new node goes after rear, points back to the old node
-//   - Many nodes:    same as one node: new node goes after rear,
-//                    points to the first node (rear->next)
+//   - 
+//   - 
+//   - 
 void CLL::insert(const string & new_data)
 {
     return;
@@ -165,21 +159,18 @@ int CLL::display_by_name(CLL_node * current, const string & name) const
 
 // remove_by_name (removes every node whose data matches)
 // Scenarios:
-//   - Empty list:                       return 0
-//   - One node, match:                  delete it, rear = nullptr
-//   - One node, no match:               return 0, list unchanged
-//   - Many nodes, match at the front:   rear->next skips the old first node
-//   - Many nodes, match in the middle:  relink prev around the node
-//   - Many nodes, match at the rear:    prev becomes the new rear
-//   - Consecutive/multiple matches:     keep checking after each removal;
-//                                       list may shrink to one node, or to empty
+//   - 
+//   - 
+//   - 
+//   - 
+//   - 
+//   - 
 //   - No match:                         return 0, list unchanged
 int CLL::remove_by_name(const string & name)
 {
     return -1;
 }
 
-// Invariant: prev->next == current, and the list is not empty.
 int CLL::remove_by_name(CLL_node * prev, CLL_node * current, const string & name)
 {
     return -1;
