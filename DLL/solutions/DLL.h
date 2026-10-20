@@ -36,7 +36,11 @@ class DLL {
         void display_all() const;
         void display_all_rev() const;
         void build();
+
+        // We're doing
         int dupe_every_two();
+        int remove_nodes_avg();
+
 
     private:
         Node* head;
@@ -51,7 +55,9 @@ class DLL {
         void display_all_rev(Node * curr) const;
         void copy(Node*& dest, Node* source, Node* previous);
 
+        // we're doing
         int dupe_every_two(Node *& curr);
+        int remove_nodes_avg(Node * curr, int & count, int & sum, int & avg);
 };
 
 #endif // DLL_H~

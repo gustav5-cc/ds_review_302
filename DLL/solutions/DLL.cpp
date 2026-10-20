@@ -114,7 +114,7 @@ void DLL::display_all_rev() const
 void DLL::build() 
 {
     // Prefill with 12 items, heavily biased towards adding the number 2
-    int initial_data[] = {10, 2, 45, 2, 7, 2, 99, 14, 2, 8, 3, 2};
+    int initial_data[] = {10, 2, 19, 2, 7, 2, 23, 14, 2, 8, 3, 2};
     for (int i = 0; i < 12; ++i) {
         insert(initial_data[i]);
     }
@@ -263,9 +263,60 @@ int DLL::dupe_every_two(Node *& curr)
         }
 
         // we pass in temp because we duped it in front of us,
-        // dont want to redupe forever
+        // dont want to redupe forever. Add 1 cuz we duped
         return 1 + dupe_every_two(temp->get_next());
     }
 
     return dupe_every_two(curr->get_next());
+}
+
+
+
+int DLL::remove_nodes_avg() 
+{
+    int sum = 0;
+    int avg = 0;
+    int count = 0;
+
+    if (!head)
+        return 0;
+    
+    return remove_nodes_avg(head, count, sum, avg);
+}
+
+int DLL::remove_nodes_avg(Node * curr, int & count, int & sum, int & avg)
+{
+    if (!curr) // hit the end of the list, compute average
+    {
+        avg = sum / count;
+        std::cout << "\n Avg:" << avg << std::endl;
+        return 0;
+    }
+    
+    int total_removed = remove_nodes_avg(curr->get_next(), count += 1, sum += curr->get_data(), avg); // recurse to the end
+
+    if (curr->get_data() <= avg) // do we need to delete the node
+    {
+        Node * temp_n = curr->get_next();
+        Node * temp_p = curr->get_prev();
+
+        if (temp_n == nullptr) { // deleting last node
+            rear = temp_p;
+        } else {
+            temp_n->set_prev(temp_p);
+        }
+
+        if (temp_p == nullptr) { // deleting first node
+            head = temp_n;
+        } else {
+            temp_p->set_next(temp_n);
+        }
+
+        delete curr;
+        curr = nullptr;
+
+        total_removed += 1;
+    }
+
+    return total_removed;
 }
