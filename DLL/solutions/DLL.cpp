@@ -18,7 +18,7 @@ void Node::set_data(int val)
     data = val; 
 }
 
-Node* Node::get_next() const 
+Node*& Node::get_next()
 { 
     return next; 
 }
@@ -28,7 +28,7 @@ void Node::set_next(Node* next_ptr)
     next = next_ptr; 
 }
 
-Node* Node::get_prev() const 
+Node*& Node::get_prev()
 { 
     return prev; 
 }
@@ -42,7 +42,7 @@ void Node::set_prev(Node* prev_ptr)
 // DLL Class Implementation
 // ==========================================
 
-DLL::DLL() : head(nullptr) 
+DLL::DLL() : head(nullptr), rear(nullptr)
 {}
 
 DLL::~DLL() 
@@ -50,7 +50,7 @@ DLL::~DLL()
     remove_all();
 }
 
-DLL::DLL(const DLL& source) : head(nullptr) 
+DLL::DLL(const DLL& source) : head(nullptr), rear(nullptr)
 {
     copy(head, source.head, nullptr);
 }
@@ -77,6 +77,8 @@ void DLL::insert(int val)
 void DLL::remove_all() 
 {
     remove_all(head);
+    head = nullptr;
+    rear = nullptr;
 }
 
 int DLL::remove(int val) 
@@ -93,6 +95,19 @@ void DLL::display_all() const
     }
 
     display_all(head);
+    std::cout << std::endl;
+}
+
+
+void DLL::display_all_rev() const 
+{
+    if(!head)
+    {
+        std::cout << "List is empty." << std::endl;
+        return;
+    }
+
+    display_all_rev(rear);
     std::cout << std::endl;
 }
 
@@ -116,6 +131,7 @@ void DLL::insert(Node*& curr, Node* previous, int val)
     {
         curr = new Node(val);
         curr->set_prev(previous);
+        this->rear = curr;
         return;
     }
     
@@ -153,6 +169,10 @@ int DLL::remove(Node*& curr, int val)
         if (curr) {
             curr->set_prev(temp->get_prev());
         }
+
+        if (curr == rear) {
+            rear = curr->get_prev();
+        }
         
         delete temp;
         
@@ -177,12 +197,22 @@ void DLL::display_all(Node* curr) const
     display_all(curr->get_next());
 }
 
+void DLL::display_all_rev(Node* curr) const 
+{    
+    if (!curr)
+        return;
+    
+    std::cout << curr->get_data() <<  " " ;
+    display_all_rev(curr->get_prev());
+}
+
 // Recursively deep copies the list while maintaining doubly linked structures
 void DLL::copy(Node*& dest, Node* source, Node* previous) 
 {
     if (!source) 
     {
         dest = nullptr;
+        rear = previous;
         return;
     }
     
@@ -192,4 +222,50 @@ void DLL::copy(Node*& dest, Node* source, Node* previous)
     Node* next_node = nullptr;
     copy(next_node, source->get_next(), dest);
     dest->set_next(next_node);
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Exercises
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+int DLL::dupe_every_two() 
+{
+    if (!head)
+        return 0;
+
+    return dupe_every_two(head);
+}
+
+int DLL::dupe_every_two(Node *& curr) 
+{
+    if (!curr)
+        return 0;
+
+    if (curr->get_data() == 2) {
+        Node * temp = new Node(2);
+
+        // Slot temp into place, in front of curr
+        temp->set_prev(curr);
+        temp->set_next(curr->get_next());
+        
+        // Adjust curr to point to temp
+        curr->set_next(temp);
+
+        // Adjust node after temp (if exists) to point back to temp
+        if (temp->get_next()) 
+        {
+            temp->get_next()->set_prev(temp);
+        }
+
+        if (curr == rear) 
+        {
+            this->rear = temp;
+        }
+
+        // we pass in temp because we duped it in front of us,
+        // dont want to redupe forever
+        return 1 + dupe_every_two(temp->get_next());
+    }
+
+    return dupe_every_two(curr->get_next());
 }

@@ -9,10 +9,10 @@ class Node {
         int get_data() const;
         void set_data(int val);
         
-        Node* get_next() const;
+        Node*& get_next();
         void set_next(Node* next_ptr);
         
-        Node* get_prev() const;
+        Node*& get_prev();
         void set_prev(Node* prev_ptr);
 
 
@@ -34,10 +34,13 @@ class DLL {
         void remove_all();
         int remove(int val); // Returns the number of occurrences removed
         void display_all() const;
+        void display_all_rev() const;
         void build();
+        int dupe_every_two();
 
     private:
         Node* head;
+        Node * rear;
 
         // Recursive helper methods utilizing pointer pass-by-reference 
         // to cleanly handle edge cases (like modifying the head or caller's next pointer)
@@ -45,7 +48,10 @@ class DLL {
         void remove_all(Node*& curr);
         int remove(Node*& curr, int val);
         void display_all(Node* curr) const;
+        void display_all_rev(Node * curr) const;
         void copy(Node*& dest, Node* source, Node* previous);
+
+        int dupe_every_two(Node *& curr);
 };
 
 #endif // DLL_H~

@@ -60,5 +60,14 @@ int main() {
     std::cout << "List 1 after inserting 50, 60: ";
     list1.display_all();
 
+    DLL list5;
+    list5.build();
+    std::cout << "List 5 Initially" << std::endl;
+    list5.display_all();
+    list5.dupe_every_two();
+    std::cout << "List 5 After the Fact" << std::endl;
+    list5.display_all();
+    list5.display_all_rev();
+    
     return 0;
 }
