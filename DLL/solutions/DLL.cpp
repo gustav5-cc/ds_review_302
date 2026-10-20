@@ -320,3 +320,29 @@ int DLL::remove_nodes_avg(Node * curr, int & count, int & sum, int & avg)
 
     return total_removed;
 }
+
+
+void DLL::reverse() 
+{
+    Node * temp = head;
+    head = rear;
+    rear = temp;
+
+    reverse(rear);
+}
+        
+void DLL::reverse(Node * curr) 
+{
+    if (!curr)
+        return;
+    // next now points to prev
+    // prev now points to next
+    // rotate a node
+    Node * temp_n = curr->get_next();
+    Node * temp_p = curr->get_prev();
+
+    curr->set_next(temp_p);
+    curr->set_prev(temp_n);
+    
+    reverse(curr->get_prev());
+}

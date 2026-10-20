@@ -5,6 +5,26 @@ void print_test_header(const std::string& title) {
     std::cout << "\n=== " << title << " ===" << std::endl;
 }
 
+void descrip(const std::string& title) {
+    std::cout << "\n=== " << title << " ===" << std::endl;
+}
+
+void print_sep() {
+    std::cout << "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n";
+}
+
+void print_before() {
+    std::cout << "\nList before changes \n";
+}
+
+void print_after() {
+    std::cout << "\nList after changes\n";
+}
+
+void print_backwards() {
+    std::cout << "\nIs list still valid backwards\n";
+}
+
 int main() {
     DLL list1;
 
@@ -60,5 +80,53 @@ int main() {
     std::cout << "List 1 after inserting 50, 60: ";
     list1.display_all();
 
+
+    // Our testing
+    /*
+    print_sep();
+    descrip("Testing Duplicate All 2's");
+    DLL list5;
+    list5.build();
+    print_before();
+    list5.display_all();
+    int twos = list5.dupe_every_two();
+    std::cout << "Twos duped: " << twos << std::endl;
+
+    print_after();
+    list5.display_all();
+    print_backwards();
+    list5.display_all_rev();
+    */
+
+    /*
+    print_sep();
+    descrip("Testing remove nodes less than average");
+    DLL list6;
+    list6.build();
+    print_before();
+    list6.display_all();
+    int rem = list6.remove_nodes_avg();
+    std::cout << "Nodes removed: " << rem << std::endl;
+
+    print_after();
+    list6.display_all();
+    print_backwards();
+    list6.display_all_rev();
+    */
+
+    /*
+    print_sep();
+    descrip("Reversing a doubly linked list");
+    DLL list7;
+    list7.build();
+    print_before();
+    list7.display_all();
+    list7.reverse();
+
+    print_after();
+    list7.display_all();
+    list7.display_all_rev();
+    */
+    
     return 0;
 }

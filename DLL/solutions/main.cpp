@@ -109,6 +109,18 @@ int main() {
     list6.display_all();
     print_backwards();
     list6.display_all_rev();
+
+    print_sep();
+    descrip("Reversing a doubly linked list");
+    DLL list7;
+    list7.build();
+    print_before();
+    list7.display_all();
+    list7.reverse();
+
+    print_after();
+    list7.display_all();
+    list7.display_all_rev();
     
     return 0;
 }

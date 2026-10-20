@@ -40,6 +40,7 @@ class DLL {
         // We're doing
         int dupe_every_two();
         int remove_nodes_avg();
+        void reverse();
 
 
     private:
@@ -58,6 +59,7 @@ class DLL {
         // we're doing
         int dupe_every_two(Node *& curr);
         int remove_nodes_avg(Node * curr, int & count, int & sum, int & avg);
+        void reverse(Node * curr);
 };
 
 #endif // DLL_H~
